@@ -81,7 +81,8 @@ celerybeat-schedule
 # virtualenv
 venv/
 ENV/
-
+./fer2013
+./pickleData
 # Spyder project settings
 .spyderproject
 
