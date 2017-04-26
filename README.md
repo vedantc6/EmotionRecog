@@ -1,2 +1,2 @@
-# EmotionDetect
-Trying to come up with emotion detection through CNN in Python
+# Emotion Recognition
+Trying to come up with emotion recognition system with the help of CNNs, coded in Python environment.
