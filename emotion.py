@@ -1,43 +1,24 @@
 import numpy as np
-import pickle
-import os
+from load_data import load_data
 
-DATA_PATH = './fer2013/fer2013.csv'
-PICKLE_PATH = './pickleData'
+from keras.models import Sequential
+from keras.layers.core import Dense, Dropout, Activation, Flatten
+from keras.layers.convolutional import Convolution2D, MaxPooling2D
+from keras.utils import np_utils
 
+np.random.seed(1337)
 
-def load_data():
-    train_size = 28709
-    test_size = 3589
-    dim = 48
-    X_train = np.empty([train_size, dim, dim])
-    X_test = np.empty([test_size, dim, dim])
-    y_train = np.empty(train_size)
-    y_test = np.empty(test_size)
+# TRAIN A CONVNET
 
-    file = open(DATA_PATH, 'r')
+batch_size = 128
+epochs = 16
+classes = 7
 
-    train_index = test_index = 0
-    for i, line in enumerate(file):
-        if i >= 1:
-            split_line = line.split(",")
-            usage = split_line[2].rstrip()
-            if usage == 'Training':
-                X_train[train_index, :, :] = np.fromstring(split_line[1], dtype='int', sep=' ').reshape(dim, dim)
-                y_train[train_index] = int(split_line[0])
-                train_index += 1
-            elif usage == 'PublicTest':
-                X_test[test_index, :, :] = np.fromstring(split_line[1], dtype='int', sep=' ').reshape(dim, dim)
-                y_test[test_index] = int(split_line[0])
-                test_index += 1
-
-    if not os.path.exists(PICKLE_PATH):
-        os.makedirs(PICKLE_PATH)
-    # Train model
-    pickle.dump(X_train, open(PICKLE_PATH + '/fer_x_train', 'wb'))
-    pickle.dump(y_train, open(PICKLE_PATH + '/fer_y_train', 'wb'))
-    # Test model
-    pickle.dump(X_test, open(PICKLE_PATH + '/fer_x_test', 'wb'))
-    pickle.dump(y_test, open(PICKLE_PATH + '/fer_y_test', 'wb'))
-
-load_data()
+# Input image dimensions
+img_rows, img_col = 48, 48
+# Number of convolutional filters
+filters = 32
+# Size of pooling area
+pool = 2
+# convolutional kernel size
+conv = 3
