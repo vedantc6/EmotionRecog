@@ -81,10 +81,11 @@ celerybeat-schedule
 # virtualenv
 venv/
 ENV/
-./fer2013
-./pickleData
 # Spyder project settings
 .spyderproject
 
 # Rope project settings
 .ropeproject
+.idea/
+fer2013/
+pickleData/
