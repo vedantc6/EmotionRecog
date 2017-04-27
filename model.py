@@ -15,7 +15,7 @@ nb_classes = 7
 
 model = Sequential()
 
-model.add(Convolution2D(nb_filters, nb_conv, nb_conv, border_mode='full', input_shape=(1, img_rows, img_cols)))
+model.add(Convolution2D(nb_filters, nb_conv, nb_conv, input_shape=(img_rows, img_cols, 1)))
 model.add(Activation('relu'))
 model.add(Convolution2D(nb_filters, nb_conv, nb_conv))
 model.add(Activation('relu'))
